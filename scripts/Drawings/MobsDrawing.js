@@ -1,6 +1,5 @@
 export class MobsDrawing extends DrawingUtils {
 
-
     constructor(Settings) {
 
         super(Settings);
@@ -8,14 +7,6 @@ export class MobsDrawing extends DrawingUtils {
     }
 
     interpolate(mobs, mists , lpX, lpY, t) {
-
-
-
-
-
-
-
-
         for (const mobOne of mobs) {
             const hX = -1 * mobOne.posX + lpX;
             const hY = mobOne.posY - lpY;
@@ -39,21 +30,8 @@ export class MobsDrawing extends DrawingUtils {
             mistOne.hX = this.lerp(mistOne.hX, hX, t);
             mistOne.hY = this.lerp(mistOne.hY, hY, t);
         }
-
-
-
-
-
     }
     invalidate(ctx, mobs, mists) {
-
-
- 
-
-
-
-
-
         for (const mobOne of mobs) {
 
 

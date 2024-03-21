@@ -1,30 +1,17 @@
-﻿
-const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-const ejs = require('ejs');
+﻿const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const PhotonParser = require('./scripts/classes/PhotonPacketParser');
 var Cap = require('cap').Cap;
 var decoders = require('cap').decoders;
 const WebSocket = require('ws');
 const ip = require('ip');
 
-
-
-
-
 const app = express();
-
 
 BigInt.prototype.toJSON = function() { return this.toString() }
 
 app.use(express.static(path.join(__dirname, 'views')));
 app.set('view engine', 'ejs');
-
-
 
 app.get('/', (req, res) => {
   const viewName = 'main/home'; 
@@ -151,8 +138,3 @@ c.on('packet', function(nbytes, trunc) {
 
 
 });
-
-
-
-
-

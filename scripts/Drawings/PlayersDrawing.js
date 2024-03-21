@@ -31,32 +31,22 @@ export class PlayersDrawing extends DrawingUtils  {
         });
     }
 
-
-    drawItems(context,canvas, players ,  devMode) {
-
+    drawItems(context, canvas, players, devMode) {
         let posY = 15;
 
         if (players.length <= 0) {
             this.images = {};
         }
       
-
         for (const playerOne of players) {
-
-            
-
-
             const items = playerOne.items;
 
-            if (items === null) {
+            if (typeof items !== 'object') {
                 continue;
-
-            } 
+            }
 
             let posX = 5;
 
-
-            
             const  total = posY + 20;
             if (total > canvas.height) {
                 break;
@@ -81,7 +71,6 @@ export class PlayersDrawing extends DrawingUtils  {
                 itemString += item + " ";
                 
 
-
                 const src = "/images/Items/" + this.itemsInfo[item] + ".png";
                 if (src.includes("undefined")) {
                     continue;
@@ -92,9 +81,6 @@ export class PlayersDrawing extends DrawingUtils  {
                 else {
                     this.preloadImageAndAddToList(src);
                 }
-
-        
-                 
               
                 posX += 10 + 40;
 
@@ -106,14 +92,6 @@ export class PlayersDrawing extends DrawingUtils  {
       
             posX = 0;
             posY += 50;
-
-     
-
-         
-
-
-       
-
         }
 
     }

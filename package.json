@@ -4,13 +4,16 @@
   "description": "",
   "main": "app.js",
   "pkg": {
-    "scripts": ["scripts/**/*.js"],
-    "assets": ["views/**/*" ]
-
+    "scripts": [
+      "scripts/**/*.js"
+    ],
+    "assets": [
+      "views/**/*"
+    ]
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"build": "nexe -b app.js --resource \"views/**/*\" --resource \"scripts/**/*\" --verbose"
+    "build": "nexe -b app.js --resource \"views/**/*\" --resource \"scripts/**/*\" --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -26,9 +29,8 @@
     "nan": "^2.18.0",
     "node-gyp": "^10.0.1",
     "node-sass": "^9.0.0",
-    "npm": "^10.2.3",
+    "npm": "^10.5.0",
     "path": "^0.12.7",
     "ws": "^8.14.2"
   }
-  
 }
