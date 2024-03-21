@@ -9,7 +9,7 @@ Albion QRadar provide a real-time map, aiding players in detecting other players
 ---
 ## ❓ If you want to use in game items
 
-- Link: https://www.mediafire.com/file/fa96b300q7ompjb/Items.rar/file
+- Link: https://www.mediafire.com/file/9wm8ts036y95ajq/Items.rar/file
 
 ### Video Tutorial
 ### Link: https://www.youtube.com/watch?v=_luNHJXrD5o

@@ -1,10 +1,7 @@
 class MobsInfo{
 
-
     constructor()
     {
-
-
         this.moblist = {};
     }
 
@@ -17,12 +14,10 @@ class MobsInfo{
         this.moblist[id][0] = tier;
         this.moblist[id][1] = type;
         this.moblist[id][2] = loc;
-
     }
 
     initMobs()
     {
-
         this.addItem(16, 4, 3, 'droneicon');
         this.addItem(17, 5, 3, 'droneicon');
         this.addItem(18, 5, 3, 'droneicon');
@@ -441,11 +436,5 @@ class MobsInfo{
         this.addItem(1893, 5, 3, 'chief');
         this.addItem(2646, 7, 3, 'nameless');
         this.addItem(2653, 6, 3, 'lord');
-
-
     }
-
-
-
-
 }

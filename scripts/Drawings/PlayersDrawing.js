@@ -41,13 +41,13 @@ export class PlayersDrawing extends DrawingUtils  {
         for (const playerOne of players) {
             const items = playerOne.items;
 
-            if (typeof items !== 'object') {
+            if (!Array.isArray(items)) {
                 continue;
             }
 
             let posX = 5;
 
-            const  total = posY + 20;
+            const total = posY + 20;
             if (total > canvas.height) {
                 break;
             }
@@ -81,11 +81,10 @@ export class PlayersDrawing extends DrawingUtils  {
                 else {
                     this.preloadImageAndAddToList(src);
                 }
-              
+                
                 posX += 10 + 40;
-
-
             }
+
             if (devMode) {
                 this.drawTextItems(posTemp, posY - 5, itemString, context, "14px", "white");
             }

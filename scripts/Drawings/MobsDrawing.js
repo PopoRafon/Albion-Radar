@@ -6,7 +6,7 @@ export class MobsDrawing extends DrawingUtils {
       
     }
 
-    interpolate(mobs, mists , lpX, lpY, t) {
+    interpolate(mobs, mists, lpX, lpY, t) {
         for (const mobOne of mobs) {
             const hX = -1 * mobOne.posX + lpX;
             const hY = mobOne.posY - lpY;
@@ -31,11 +31,9 @@ export class MobsDrawing extends DrawingUtils {
             mistOne.hY = this.lerp(mistOne.hY, hY, t);
         }
     }
+
     invalidate(ctx, mobs, mists) {
         for (const mobOne of mobs) {
-
-
-            
             if (mobOne.type == 3 && !this.settings.mobBoss) {
 
                 continue;
@@ -89,8 +87,6 @@ export class MobsDrawing extends DrawingUtils {
                 this.drawImageCustom(ctx, point.x, point.y, "droneicon" , 40);
             }
             else {
-        
-             
                 if (mobOne.enchantmentLevel == 1) {
                     this.drawFilledCircle(ctx, point.x, point.y, 15, "green");
 
@@ -126,44 +122,18 @@ export class MobsDrawing extends DrawingUtils {
          
                 this.drawText(point.x, point.y - 20, mobOne.typeId, ctx);
             }
-
-
-
-
-
-       
-  
-
-
-
         }
 
         for (const mistsOne of mists) {
-
-
-
             if (!this.settings.mistEnchants[mistsOne.enchant]) {
                 continue;
-
             }
 
-            
             if (this.settings.mistSolo && mistsOne.type == 0 || this.settings.mistDuo == true && mistsOne.type == 1) {
-
-
                 const point = this.transformPoint(mistsOne.hX, mistsOne.hY);
 
                 this.drawImageCustom(ctx, point.x, point.y, "mist_" + mistsOne.enchant, 30);
-               
             }
-   
-            
-            
-
         }
-
-
-
     }
-
 }

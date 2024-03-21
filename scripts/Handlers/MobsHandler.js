@@ -37,12 +37,6 @@ class Mist {
 
 
 
-
-
-
-
-
-
 class MobsHandler {
     constructor() {
         this.mobsList = [];
@@ -65,9 +59,6 @@ class MobsHandler {
     NewMobEvent(parameters) {
         const id = parseInt(parameters[0]);
         let typeId = parseInt(parameters[1]);
-
-
-
         const loc = parameters[7];
         let posX = loc[0];
         let posY = loc[1];

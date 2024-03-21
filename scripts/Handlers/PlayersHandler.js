@@ -1,4 +1,4 @@
-
+const test = [];
 
  class Player {
     constructor(posX, posY, id, nickname, guildName1, currentHealth, initialHealth, items) {
@@ -66,8 +66,6 @@
      }
 
      handleNewPlayerEvent(id, Parameters, ignoreList, sound) {
-
-
          const nickname = Parameters[1];
          const guildName = String(Parameters[8]); 
          const ally = String(Parameters[48]); 
@@ -96,13 +94,10 @@
              }
 
 
-
-
          });
          if (returnVal) {
              return;
          }
-
 
          if (sound) {
 
@@ -111,30 +106,16 @@
          var positionArray = Parameters[13];
          const posX = positionArray[0];
          const posY = positionArray[1];
-  
-   
          const currentHealth = Parameters[19];
          const initialHealth = Parameters[20];
-         const items = Parameters[37];
+         const items = Parameters[38]['data'] ?? Parameters[38];
 
          this.addPlayer(posX, posY, id, nickname, guildName, currentHealth, initialHealth, items);
-
-
-
      }
 
      handleMountedPlayerEvent(id, parameters) {
-
-       
-     
-
-   
           let  ten = parameters[10];
-
-
-        
           let   mounted = parameters[11];
-    
 
          if (mounted == "true" || mounted == true) {
              this.updatePlayerMounted(id, true);

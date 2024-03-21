@@ -97,10 +97,6 @@ server.on('connection', () => {
   console.log("openned");
 
 c.on('packet', function(nbytes, trunc) {
-
-
-
-
   let  ret = decoders.Ethernet(buffer);
 	ret = decoders.IPV4(buffer, ret.offset);
 	ret = decoders.UDP(buffer, ret.offset);
@@ -135,6 +131,4 @@ c.on('packet', function(nbytes, trunc) {
       client.send(JSON.stringify({ code : "request", dictionary: dictionaryDataJSON }))
    });
   });
-
-
 });
