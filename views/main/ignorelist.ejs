@@ -1,28 +1,15 @@
-
- 
   <div class="h-full pb-16 overflow-y-auto">
                 <div class="container grid px-6 mx-auto">
                   <!-- With actions -->
                   <div class =" " >
-
-
-                 <h2
+			<h2
             class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"  >
              Ignore list
            </h2>
-
-
-
                 <div class = "flex justify-center">
-
-
                   <div class = "flex justify-end "> 
-
-
                     <div x-data="{ isOpen: false, buttonText: 'Select' }" class="relative mr-6">
                       <!-- Container for the button and SVG icon -->
-
-
                       <button @@click="isOpen = !isOpen" id="dropdownDefaultButton" data-dropdown-toggle="dropdown"  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="button">
                         <div class="flex items-center">
                             <div x-text="buttonText"></div>
@@ -42,7 +29,6 @@
                             </div>
                         </div>
                     </button>
-
                       <!-- Dropdown menu -->
                       <div x-show="isOpen" @@click.away="isOpen = false" class="absolute mt-2 dark:bg-gray-700  dark::text-white border border-gray-300 rounded shadow-lg" style="width: max-content;">
                         <!-- Dropdown items -->
@@ -51,15 +37,8 @@
                         <a href="#" class="block px-4 py-2 dark:text-gray-300 hover:bg-blue-100" style="width: 100%;" @@click="buttonText = 'Ally'; isOpen = false;">Ally</a>
                       </div>
                     </div>
-
-
-
                   </div>
-
-
-
                     <label class="block text-sm mr-6">
-
                       <input 
                         id="nameInput"
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -72,9 +51,6 @@
                     >
                       Add item +
                     </button>
-
-
-
                   </div>
                   <div class="w-full overflow-hidden rounded-lg shadow-xs">
                     <div class="w-full overflow-x-auto">
@@ -92,43 +68,19 @@
                         <tbody id = "tableBody"
                           class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                         >
-
-
-
-
-
                         </tbody>
                       </table>
                     </div>
                   </div>
                 </div>
               </div>
-
-
-
-
-
-
-                               <script>
-
-
-
+	<script>
     const storedData = JSON.parse(localStorage.getItem("ignoreList")) || [];
+	storedData.forEach(element => {
+	addItem(element.id, element.value , element.type );
+	});
 
-
-storedData.forEach(element => {
-
-  addItem(element.id, element.value , element.type );
-
-});
-
-
-
-    function addItem(i, value , type )
-    {
-
-
-
+    function addItem(i, value , type ) {
       const counterCell = i +"counterCell";
       const tableCell = i + "tableCell"
       const tableRow = i + "tableRow"
@@ -171,40 +123,23 @@ newRow.innerHTML = `
 // Append the new row to the table body.
 tableBody.appendChild(newRow);
 
-
       const button  = document.getElementById(tableCell);
 
 
       button.addEventListener("click", function(event) {
 
-
       let idx = 0;
-
-            for (var i=0;i<tableBody.rows.length; i++){
+		for (var i=0;i<tableBody.rows.length; i++){
             if ( tableBody.rows[i] == newRow ){
-            idx = i;
-        
-
-            break;
+				idx = i;
+				break;
             }
-          }
-
-
-
-
-
-
-
-
-
+		}
 
         storedData.forEach(element => {
-
-
             const paragraphContext = document.getElementById(element.id + "counterCell");
             if(paragraphContext!=null)
             {
-
 
             if(parseInt(paragraphContext.textContent) > idx+1)
             {
@@ -215,44 +150,18 @@ tableBody.appendChild(newRow);
 
             }
              }
-
-
-
-
-
         });
 
         storedData.splice(idx ,1);
         tableBody.removeChild(newRow);
 
-
-
-
-
         const updatedData = JSON.stringify(storedData);
         localStorage.setItem("ignoreList", updatedData);
-
-
-
-
       });
-
-
     }
-
-
-
-
-
-
-
-
-
 const nameInput = document.getElementById("nameInput");
 
 let inputValue ="";
-
-
 
 const buttonText = document.querySelector('[x-data="{ isOpen: false, buttonText: \'Select\' }"] [x-text="buttonText"]');
 
@@ -264,10 +173,6 @@ nameInput.addEventListener("input", function(event) {
 const button = document.getElementById("addItem");
 
 button.addEventListener("click", function(event) {
-
-
-
-
   const selectedText = buttonText.textContent;
   if(selectedText == "Select")
   {
@@ -279,25 +184,7 @@ button.addEventListener("click", function(event) {
   storedData.push(newItem);
   addItem(storedData.length, inputValue , selectedText )
 
-
-
-
-
-
-
   const updatedData = JSON.stringify(storedData);
   localStorage.setItem("ignoreList", updatedData);
-
-
-
-
 });
-
-
-
-
-
-
-
-
   </script>
