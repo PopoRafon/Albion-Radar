@@ -87,7 +87,7 @@ export class MobsDrawing extends DrawingUtils {
 			if (this.settings.mobHp) {
 				const textWidth = ctx.measureText(mobOne.health).width;
 
-				this.drawTextItems(point.x - textWidth / 2, point.y + 24, mobOne.health, ctx, '12px', 'yellow');
+				this.drawTextItems(point.x - textWidth / 2, point.y + 24, mobOne.health, ctx, '12px', '#FF2121');
 			}
 			if (this.settings.mobDevMode) {
 				this.drawText(point.x, point.y - 20, mobOne.typeId, ctx);

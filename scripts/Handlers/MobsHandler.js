@@ -51,59 +51,38 @@ class MobsHandler {
 	}
 
 	NewMobEvent(parameters) {
-		const id = parseInt(parameters[0]);
-		let typeId = parseInt(parameters[1]);
-		const loc = parameters[7];
-		let posX = loc[0];
-		let posY = loc[1];
-		let exp = 0;
-
-		try {
-			exp = parseFloat(parameters[13]);
-		} catch (error) {
-			exp = 0;
-		}
-
-		let name = parameters[32] ?? null;
+		const id = parameters[0];
+		const typeId = parameters[1];
+		const [posX, posY] = parameters[7];
+		const health = parameters[13];
 		const enchant = parameters[33] ?? null;
+		const name = parameters[32] ?? parameters[31];
+		let rarity = parseInt(parameters[19]);
 
-		if (name == null) {
-			try {
-				name = parameters[31];
-			} catch (error) {
-				name = null;
-			}
-		}
-
-		let rarity = 1;
-
-		try {
-			rarity = parseInt(parameters[19]);
-		} catch (error) {
+		if (isNaN(rarity)) {
 			rarity = 1;
 		}
 
 		if (name != null) {
 			this.addMist(id, posX, posY, name, enchant);
-		}
-		else {
-			this.addMob(id, typeId, posX, posY, exp, 0, rarity, exp);
+		} else {
+			this.addMob(id, typeId, posX, posY, health, 0, rarity);
 		}
 	}
 
 	addMob(id, typeId, posX, posY, health, enchant, rarity) {
-		const h = new Mob(id, typeId, posX, posY, health, enchant, rarity);
+		const newMob = new Mob(id, typeId, posX, posY, health, enchant, rarity);
 
 		if (this.mobinfo[typeId] != null) {
 			const mobsInfo = this.mobinfo[typeId];
 
-			h.tier = mobsInfo[0];
-			h.type = mobsInfo[1];
-			h.name = mobsInfo[2];
+			newMob.tier = mobsInfo[0];
+			newMob.type = mobsInfo[1];
+			newMob.name = mobsInfo[2];
 		}
 
-		if (!this.mobsList.includes(h)) {
-			this.mobsList.push(h);
+		if (!this.mobsList.includes(newMob)) {
+			this.mobsList.push(newMob);
 		}
 	}
 

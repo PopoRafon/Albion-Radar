@@ -52,7 +52,7 @@ class PlayersHandler {
 
 	handleNewPlayerEvent(id, Parameters, ignoreList, sound) {
 		const nickname = Parameters[1];
-		const guildName = String(Parameters[8]);
+		const guildName = Parameters[8];
 		const ally = String(Parameters[48]);
 		let returnVal = false;
 
@@ -61,7 +61,7 @@ class PlayersHandler {
 				returnVal = true;
 			}
 
-			if (guildName != 'undefined') {
+			if (!guildName) {
 				if (item.type == 'Guild' && item.value.toLowerCase() == guildName.toLowerCase()) {
 					returnVal = true;
 				}
@@ -91,8 +91,8 @@ class PlayersHandler {
 	}
 
 	handleMountedPlayerEvent(id, parameters) {
-		let ten = parameters[10];
-		let mounted = parameters[11];
+		const ten = parameters[10];
+		const mounted = parameters[11];
 
 		if (mounted == 'true' || mounted == true) {
 			this.updatePlayerMounted(id, true);

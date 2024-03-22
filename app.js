@@ -63,7 +63,9 @@ app.use('/images/Items', express.static(__dirname + '/images/Items'));
 const port = 5001;
 
 app.listen(port, () => {
-	console.log(`Server is running on http://localhost:${port}`);
+	const blueColor = '\x1b[94m';
+	const reset = '\x1b[0m';
+	console.log(`${blueColor}Server is running on http://localhost:${port}${reset}`);
 });
 
 const getActiveIP = () => {
@@ -82,10 +84,11 @@ c.open(device, filter, bufSize, buffer);
 c.setMinBytes && c.setMinBytes(0);
 
 const server = new WebSocket.Server({ port: 5002, host: 'localhost' });
-server.on('connection', () => {
+
+server.on('connection', (socket) => {
 	console.log('User has connected to the server.');
 
-	c.on('packet', function (nbytes, trunc) {
+	function packetListener(nbytes, trunc) {
 		let ret = decoders.Ethernet(buffer);
 		ret = decoders.IPV4(buffer, ret.offset);
 		ret = decoders.UDP(buffer, ret.offset);
@@ -99,21 +102,32 @@ server.on('connection', () => {
 		catch (error) {
 			console.log(error);
 		}
-	});
+	}
 
-	manager.on('event', (dictonary) => {
-		const dictionaryDataJSON = JSON.stringify(dictonary);
+	function eventListener(dictionary) {
+		const dictionaryDataJSON = JSON.stringify(dictionary);
 
 		server.clients.forEach(function (client) {
 			client.send(JSON.stringify({ code: 'event', dictionary: dictionaryDataJSON }));
 		});
-	});
+	}
 
-	manager.on('request', (dictonary) => {
-		const dictionaryDataJSON = JSON.stringify(dictonary);
+	function requestListener(dictionary) {
+		const dictionaryDataJSON = JSON.stringify(dictionary);
 
 		server.clients.forEach(function (client) {
 			client.send(JSON.stringify({ code: 'request', dictionary: dictionaryDataJSON }));
 		});
+	}
+
+	c.on('packet', packetListener);
+	manager.on('event', eventListener);
+	manager.on('request', requestListener);
+
+	socket.on('close', () => {
+		console.log('User has disconnected from the server.');
+		c.removeListener('packet', packetListener);
+		manager.removeListener('event', eventListener);
+		manager.removeListener('request', requestListener);
 	});
 });
