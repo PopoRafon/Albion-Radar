@@ -30,17 +30,17 @@
 	}
 
 	drawBoard(canvasBottom, contextBottom) {
-		var bw = canvasBottom.width;
-		var bh = canvasBottom.height;
-		var p = 0;
-		let totalSpace = canvasBottom.height / 10;
+		const bw = canvasBottom.width;
+		const bh = canvasBottom.height;
+		const p = 0;
+		const totalSpace = canvasBottom.height / 10;
 
-		for (var x = 0; x <= bw; x += totalSpace) {
+		for (let x = 0; x <= bw; x += totalSpace) {
 			contextBottom.moveTo(0.5 + x + p, p);
 			contextBottom.lineTo(0.5 + x + p, bh + p);
 		}
 
-		for (var x = 0; x <= bh; x += 50) {
+		for (let x = 0; x <= bh; x += 50) {
 			contextBottom.moveTo(p, 0.5 + x + p);
 			contextBottom.lineTo(bw + p, 0.5 + x + p);
 		}
@@ -54,11 +54,7 @@
 	}
 
 	drawImageCustom(ctx, x, y, drawTo, size) {
-		if (drawTo === undefined) {
-			return;
-		}
-
-		if (drawTo.toLowerCase().includes('undefined')) {
+		if (!drawTo || drawTo.toLowerCase().includes('undefined')) {
 			return;
 		}
 
@@ -66,8 +62,7 @@
 
 		if (this.settings.images[src]) {
 			ctx.drawImage(this.settings.images[src], x - size / 2, y - size / 2, size, size,);
-		}
-		else {
+		} else {
 			this.settings.preloadImageAndAddToList(src);
 		}
 	}

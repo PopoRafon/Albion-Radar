@@ -25,12 +25,7 @@ class Mist {
 		this.enchant = enchant;
 		this.hX = 0;
 		this.hY = 0;
-
-		if (name.toLowerCase().includes('solo')) {
-			this.type = 0;
-		} else {
-			this.type = 1;
-		}
+		this.type = name.toLowerCase().includes('solo') ? 0 : 1;
 	}
 }
 
@@ -55,15 +50,15 @@ class MobsHandler {
 		const typeId = parameters[1];
 		const [posX, posY] = parameters[7];
 		const health = parameters[13];
-		const enchant = parameters[33] ?? null;
-		const name = parameters[32] ?? parameters[31];
+		const enchant = parameters[33];
+		const name = parameters[32];
 		let rarity = parseInt(parameters[19]);
 
 		if (isNaN(rarity)) {
 			rarity = 1;
 		}
 
-		if (name != null) {
+		if (name) {
 			this.addMist(id, posX, posY, name, enchant);
 		} else {
 			this.addMob(id, typeId, posX, posY, health, 0, rarity);
@@ -87,10 +82,10 @@ class MobsHandler {
 	}
 
 	addMist(id, posX, posY, name, enchant) {
-		const d = new Mist(id, posX, posY, name, enchant);
+		const newMist = new Mist(id, posX, posY, name, enchant);
 
-		if (!this.mistList.some(mist => mist.id === d.id)) {
-			this.mistList.push(d);
+		if (!this.mistList.some(mist => mist.id === newMist.id)) {
+			this.mistList.push(newMist);
 		}
 	}
 
@@ -131,7 +126,7 @@ class MobsHandler {
 	}
 
 	removeMob(id) {
-		this.mobsList = this.mobsList.filter((x) => x.id !== id);
+		this.mobsList = this.mobsList.filter(mob => mob.id !== id);
 	}
 
 	getMobList() {

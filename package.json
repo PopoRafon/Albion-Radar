@@ -12,6 +12,7 @@
     ]
   },
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "nexe -b app.js --resource \"views/**/*\" --resource \"scripts/**/*\" --verbose"
   },

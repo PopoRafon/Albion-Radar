@@ -1,20 +1,13 @@
 class Dungeon {
-	constructor(id, posX, posY, name, enchant1) {
+	constructor(id, posX, posY, name, enchant) {
 		this.id = id;
 		this.posX = posX;
 		this.posY = posY;
 		this.name = name;
-		this.enchant = enchant1;
-
-		if (name.toLowerCase().includes('solo')) {
-			this.type = 0;
-		} else {
-			this.type = 1;
-		}
-
+		this.enchant = enchant;
+		this.type = name.toLowerCase().includes('solo') ? 0 : 1;
 		this.hY = 0;
 		this.hX = 0;
-
 	}
 }
 
@@ -24,20 +17,20 @@ class DungeonsHandler {
 	}
 
 	addDungeon(id, posX, posY, name, enchant) {
-		const d = new Dungeon(id, posX, posY, name, enchant);
+		const newDungeon = new Dungeon(id, posX, posY, name, enchant);
 
-		if (!this.dungeonList.some(item => item.Id === d.Id)) {
-			this.dungeonList.push(d);
+		if (!this.dungeonList.some(dungeon => dungeon.id === newDungeon.id)) {
+			this.dungeonList.push(newDungeon);
 		}
 	}
 
-	removeMob(id) {
-		this.dungeonList = this.dungeonList.filter(item => item.Id !== id);
+	removeDungeon(id) {
+		this.dungeonList = this.dungeonList.filter(dungeon => dungeon.id !== id);
 	}
 
-	updateMobPosition(id, posX, posY) {
+	updateDungeonPosition(id, posX, posY) {
 		this.dungeonList.forEach(p => {
-			if (p.Id === id) {
+			if (p.id === id) {
 				p.PosX = posX;
 				p.PosY = posY;
 			}
@@ -46,17 +39,18 @@ class DungeonsHandler {
 
 	dungeonEvent(parameters) {
 		const id = parameters[0];
-		const position = parameters[1];
+		const [posX, posY] = parameters[1];
 		const name = parameters[3];
-
 		const enchant = +parameters[5];
-		this.addDungeon(id, position[0], position[1], name, enchant);
+
+		this.addDungeon(id, posX, posY, name, enchant);
 	}
 
-	updateMobEnchantmentLevel(mobId, enchantmentLevel) {
-		const mob = this.dungeonList.find(x => x.Id === mobId);
-		if (mob) {
-			mob.Enchant = enchantmentLevel;
+	updateDungeonEnchantmentLevel(dungeonId, enchantmentLevel) {
+		const dungeon = this.dungeonList.find(dungeon => dungeon.id === dungeonId);
+
+		if (dungeon) {
+			dungeon.enchant = enchantmentLevel;
 		}
 	}
 }

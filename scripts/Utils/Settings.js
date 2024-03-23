@@ -65,12 +65,7 @@ class Settings {
 	}
 
 	returnLocalBool(item) {
-		if (localStorage.getItem(item) == 'true') {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return localStorage.getItem(item) === 'true';
 	}
 
 	update() {

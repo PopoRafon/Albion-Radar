@@ -33,51 +33,38 @@ export class MobsDrawing extends DrawingUtils {
 
 	invalidate(ctx, mobs, mists) {
 		for (const mobOne of mobs) {
-			if (mobOne.type == 3 && !this.settings.mobBoss) {
+			if ((mobOne.type == 1 && !this.settings.mobTiers[mobOne.tier - 1]) ||
+				(mobOne.type == 3 && !this.settings.mobBoss) ||
+				(mobOne.type == 4 && !this.settings.drones) ||
+				!this.settings.mobEnchants[mobOne.enchantmentLevel] ||
+				mobOne.type == 0
+			) {
 				continue;
-			}
-			else if (mobOne.type == 4 && !this.settings.drones) {
-				continue;
-			}
-			else {
-				if (!this.settings.mobEnchants[mobOne.enchantmentLevel]) {
-					continue;
-				}
-				if (mobOne.type == 0 || mobOne.type == 1 && !this.settings.mobTiers[mobOne.tier - 1]) {
-					continue;
-				}
 			}
 
 			const point = this.transformPoint(mobOne.hX, mobOne.hY);
 
 			if (mobOne.type == 1) {
 				this.drawImageCustom(ctx, point.x, point.y, 'hide_' + mobOne.tier + '_' + mobOne.enchantmentLevel, 40);
-			}
-			else if (mobOne.type == 0) {
+			} else if (mobOne.type == 0) {
 				if (myString.includes('wood')) {
 					this.drawImageCustom(ctx, point.x, point.y, 'Logs_' + mobOne.tier + '_' + mobOne.enchantmentLevel, 40);
 				}
 				else {
 					this.drawImageCustom(ctx, point.x, point.y, mobOne.name + '_' + mobOne.tier + '_' + mobOne.enchantmentLevel, 40);
 				}
-			}
-			else if (mobOne.type == 3) {
+			} else if (mobOne.type == 3) {
 				this.drawImageCustom(ctx, point.x, point.y, this.name, 40);
-			}
-			else if (mobOne.type == 4) {
+			} else if (mobOne.type == 4) {
 				this.drawImageCustom(ctx, point.x, point.y, 'droneicon', 40);
-			}
-			else {
+			} else {
 				if (mobOne.enchantmentLevel == 1) {
 					this.drawFilledCircle(ctx, point.x, point.y, 15, 'green');
-				}
-				else if (mobOne.enchantmentLevel == 2) {
+				} else if (mobOne.enchantmentLevel == 2) {
 					this.drawFilledCircle(ctx, point.x, point.y, 15, '#45BDEE');
-				}
-				else if (mobOne.enchantmentLevel == 3) {
+				} else if (mobOne.enchantmentLevel == 3) {
 					this.drawFilledCircle(ctx, point.x, point.y, 15, 'purple');
-				}
-				else if (mobOne.enchantmentLevel == 4) {
+				} else if (mobOne.enchantmentLevel == 4) {
 					this.drawFilledCircle(ctx, point.x, point.y, 15, 'yellow');
 				}
 

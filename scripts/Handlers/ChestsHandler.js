@@ -3,7 +3,7 @@ class Chest {
 		this.id = id;
 		this.posX = posX;
 		this.posY = posY;
-		this.chestName = name;
+		this.name = name;
 		this.hX = 0;
 		this.hY = 0;
 	}
@@ -15,9 +15,10 @@ class ChestsHandler {
 	}
 
 	addChest(id, posX, posY, name) {
-		const h = new Chest(id, posX, posY, name);
-		if (!this.chestsList.some(chest => chest.id === h.id)) {
-			this.chestsList.push(h);
+		const newChest = new Chest(id, posX, posY, name);
+
+		if (!this.chestsList.some(chest => chest.id === newChest.id)) {
+			this.chestsList.push(newChest);
 		}
 	}
 

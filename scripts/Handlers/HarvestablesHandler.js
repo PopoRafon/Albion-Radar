@@ -5,10 +5,10 @@
 		this.tier = tier;
 		this.posX = posX;
 		this.posY = posY;
-		this.hX = 0;
-		this.hY = 0;
 		this.charges = charges;
 		this.size = size;
+		this.hX = 0;
+		this.hY = 0;
 	}
 
 	setCharges(charges) {
@@ -22,12 +22,11 @@ class HarvestablesHandler {
 	}
 
 	addHarvestable(id, type, tier, posX, posY, charges, size) {
-		const h = new Harvestable(id, type, tier, posX, posY, charges, size);
-		const index = this.harvestableList.findIndex((item) => item.id === h.id);
+		const newHarvestable = new Harvestable(id, type, tier, posX, posY, charges, size);
+		const index = this.harvestableList.findIndex(harvestable => harvestable.id === newHarvestable.id);
 
 		if (index === -1) {
-			this.harvestableList.push(h);
-			// console.log('New Harvestable: ' + h.toString());
+			this.harvestableList.push(newHarvestable);
 		} else {
 			this.harvestableList[index].setCharges(charges);
 		}
@@ -43,18 +42,18 @@ class HarvestablesHandler {
 	newHarvestableObject(id, Parameters) {
 		const type = Parameters[5];
 		const tier = Parameters[7];
-		const location = Parameters[8];
+		const [posX, posY] = Parameters[8];
 		const enchant = Parameters[10] ?? 0;
 		const size = Parameters[11] ?? 0;
 
-		this.addHarvestable(id, type, tier, location[0], location[1], enchant, size);
+		this.addHarvestable(id, type, tier, posX, posY, enchant, size);
 	}
 
 	base64ToArrayBuffer(base64) {
-		var binaryString = atob(base64);
-		var bytes = new Uint8Array(binaryString.length);
+		const binaryString = atob(base64);
+		const bytes = new Uint8Array(binaryString.length);
 
-		for (var i = 0; i < binaryString.length; i++) {
+		for (let i = 0; i < binaryString.length; i++) {
 			bytes[i] = binaryString.charCodeAt(i);
 		}
 
@@ -87,20 +86,22 @@ class HarvestablesHandler {
 
 	removeNotInRange(lpX, lpY) {
 		this.harvestableList = this.harvestableList.filter(
-			(x) => this.calculateDistance(lpX, lpY, x.posX, x.posY) <= 80
+			(harvestable) => this.calculateDistance(lpX, lpY, harvestable.posX, harvestable.posY) <= 80
 		);
-		this.harvestableList = this.harvestableList.filter(item => item.size !== undefined);
+
+		this.harvestableList = this.harvestableList.filter(harvestable => harvestable.size !== undefined);
 	}
 
 	calculateDistance(lpX, lpY, posX, posY) {
 		const deltaX = lpX - posX;
 		const deltaY = lpY - posY;
 		const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
 		return distance;
 	}
 
 	removeHarvestable(id) {
-		this.harvestableList = this.harvestableList.filter((x) => x.id !== id);
+		this.harvestableList = this.harvestableList.filter(harvestable => harvestable.id !== id);
 	}
 
 	getHarvestableList() {
@@ -108,7 +109,7 @@ class HarvestablesHandler {
 	}
 
 	updateHarvestable(harvestableId, count) {
-		const harvestable = this.harvestableList.find((h) => h.id == harvestableId);
+		const harvestable = this.harvestableList.find(harvestable => harvestable.id == harvestableId);
 
 		if (harvestable) {
 			harvestable.size = harvestable.size - count;

@@ -23,19 +23,13 @@
 		for (const chestOne of chests) {
 			const point = this.transformPoint(chestOne.hX, chestOne.hY);
 
-			if (this.settings.chestGreen && chestOne.chestName.toLowerCase().includes('green') || chestOne.chestName.toLowerCase().includes('standard')) {
+			if (this.settings.chestGreen && chestOne.name.toLowerCase().includes('green') || chestOne.name.toLowerCase().includes('standard')) {
 				this.drawImageCustom(ctx, point.x, point.y, 'green', 50);
-			}
-
-			else if (this.settings.chestGreen && chestOne.chestName.toLowerCase().includes('uncommon') || chestOne.chestName.toLowerCase().includes('blue')) {
+			} else if (this.settings.chestGreen && chestOne.name.toLowerCase().includes('uncommon') || chestOne.name.toLowerCase().includes('blue')) {
 				this.drawImageCustom(ctx, point.x, point.y, 'blue', 50);
-			}
-
-			else if (this.settings.chestGreen && chestOne.chestName.toLowerCase().includes('rare') || chestOne.chestName.toLowerCase().includes('purple')) {
+			} else if (this.settings.chestGreen && chestOne.name.toLowerCase().includes('rare') || chestOne.name.toLowerCase().includes('purple')) {
 				this.drawImageCustom(ctx, point.x, point.y, 'rare', 50);
-			}
-
-			else if (this.settings.chestGreen && chestOne.chestName.toLowerCase().includes('legendary') || chestOne.chestName.toLowerCase().includes('yellow')) {
+			} else if (this.settings.chestGreen && chestOne.name.toLowerCase().includes('legendary') || chestOne.name.toLowerCase().includes('yellow')) {
 				this.drawImageCustom(ctx, point.x, point.y, 'legendary', 50);
 			}
 		}

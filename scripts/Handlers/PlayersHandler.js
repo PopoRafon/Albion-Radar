@@ -50,42 +50,33 @@ class PlayersHandler {
 		}
 	}
 
-	handleNewPlayerEvent(id, Parameters, ignoreList, sound) {
-		const nickname = Parameters[1];
-		const guildName = Parameters[8];
-		const ally = String(Parameters[48]);
-		let returnVal = false;
+	handleNewPlayerEvent(id, parameters, ignoreList, sound) {
+		const nickname = parameters[1];
+		const guildName = parameters[8] ?? '';
+		const ally = String(parameters[48]);
 
-		ignoreList.forEach(item => {
+		for (const item of ignoreList) {
 			if (item.type == 'Player' && item.value.toLowerCase() == nickname.toLowerCase()) {
-				returnVal = true;
+				return;
 			}
 
-			if (!guildName) {
-				if (item.type == 'Guild' && item.value.toLowerCase() == guildName.toLowerCase()) {
-					returnVal = true;
-				}
+			if (!guildName && item.type == 'Guild' && item.value.toLowerCase() == guildName.toLowerCase()) {
+				return;
 			}
 
-			if (ally != 'undefined') {
-				if (item.type == 'Ally' && item.value.toLowerCase() == ally.toLowerCase()) {
-					returnVal = true;
-				}
+			if (ally != 'undefined' && item.type == 'Ally' && item.value.toLowerCase() == ally.toLowerCase()) {
+				return;
 			}
-		});
-
-		if (returnVal) {
-			return;
 		}
 
 		// if (sound) {
 
 		// }
 
-		const [posX, posY] = Parameters[14];
-		const currentHealth = Parameters[19];
-		const initialHealth = Parameters[20];
-		const items = Parameters[38]['data'] ?? Parameters[38];
+		const [posX, posY] = parameters[14];
+		const currentHealth = parameters[20];
+		const initialHealth = parameters[21];
+		const items = parameters[38]['data'] ?? parameters[38];
 
 		this.addPlayer(posX, posY, id, nickname, guildName, currentHealth, initialHealth, items);
 	}
@@ -94,9 +85,7 @@ class PlayersHandler {
 		const ten = parameters[10];
 		const mounted = parameters[11];
 
-		if (mounted == 'true' || mounted == true) {
-			this.updatePlayerMounted(id, true);
-		} else if (ten == '-1') {
+		if (mounted || ten === -1) {
 			this.updatePlayerMounted(id, true);
 		} else {
 			this.updatePlayerMounted(id, false);
