@@ -1,22 +1,9 @@
-## ✨ Join Discord
-- Link: https://discord.gg/rKKVqUdP3p
-
----
-
-## ❓ What is QRadar?
-Albion QRadar provide a real-time map, aiding players in detecting other players, creatures, and resources nearby.
-
----
-## ❓ If you want to use in game items
-
-- Link: https://www.mediafire.com/file/9wm8ts036y95ajq/Items.rar/file
-
-### Video Tutorial
-### Link: https://www.youtube.com/watch?v=_luNHJXrD5o
-
----
-## ❓ Usage (Windows)
-
+# What is this?
+Albion radar provides a real-time map, aiding players in detecting other players, creatures, and resources nearby.
+## If you want to use in game items
+- Link: https://www.mediafire.com/file/6b94umj4szr93hb/Items.rar/file
+# Installation
+## Windows
 1. Download Node.js v18.18.2:
 - [Node.js v18.18.2 (64-bit)](https://nodejs.org/dist/v18.18.2/node-v18.18.2-x64.msi)
 2. Download Npcap:
@@ -31,13 +18,7 @@ npm install --global windows-build-tools
 ```
 npm install
 ```
-6. Run the application:
-```
-node app.js
-```
----
-## ❓ Usage (Linux)
-
+## Linux
 1. Switch to root user:
 ```
 sudo su
@@ -68,11 +49,10 @@ sudo apt-get install build-essential
 ```
 npm install
 ```
-9. Navigate to the project directory and run the application:
-```
-node app.js
-```
-10. Open http://localhost:5001 in your browser.
----
-Utilized the parser from https://github.com/0xN0x/photon-packet-parser for efficient packet parsing.
----
+# Usage
+## Windows
+- **OPTION 1** Double click on `run.bat` file.
+- **OPTION 2** Run command `node app.js` in the application folder and open http://localhost:5001 in the browser.
+## Linux
+- Run command `node app.js` in the application folder and open http://localhost:5001 in your browser.
+### Utilized the parser from https://github.com/0xN0x/photon-packet-parser for efficient packet parsing.
