@@ -39,12 +39,12 @@ class HarvestablesHandler {
 		this.updateHarvestable(id, count);
 	}
 
-	newHarvestableObject(id, Parameters) {
-		const type = Parameters[5];
-		const tier = Parameters[7];
-		const [posX, posY] = Parameters[8];
-		const enchant = Parameters[10] ?? 0;
-		const size = Parameters[11] ?? 0;
+	newHarvestableObject(id, parameters) {
+		const type = parameters[5];
+		const tier = parameters[7];
+		const [posX, posY] = parameters[8];
+		const enchant = parameters[10] ?? 0;
+		const size = parameters[11] ?? 0;
 
 		this.addHarvestable(id, type, tier, posX, posY, enchant, size);
 	}

@@ -69,10 +69,6 @@ class PlayersHandler {
 			}
 		}
 
-		// if (sound) {
-
-		// }
-
 		const [posX, posY] = parameters[14];
 		const currentHealth = parameters[20];
 		const initialHealth = parameters[21];

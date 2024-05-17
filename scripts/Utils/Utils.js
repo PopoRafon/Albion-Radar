@@ -86,10 +86,10 @@ function onEvent(parameters) {
 	case 27:
 		playersHandler.handleNewPlayerEvent(id, parameters, settings.ignoreList, settings.settingSound);
 		break;
-	case 36:
+	case 37:
 		harvestablesHandler.newSimpleHarvestableObject(parameters);
 		break;
-	case 37:
+	case 38:
 		harvestablesHandler.newHarvestableObject(id, parameters);
 		break;
 	case 44:
@@ -101,13 +101,13 @@ function onEvent(parameters) {
 	case 86:
 		playersHandler.updateItems(id, parameters);
 		break;
-	case 118:
+	case 120:
 		mobsHandler.NewMobEvent(parameters);
 		break;
 	case 201:
 		playersHandler.handleMountedPlayerEvent(id, parameters);
 		break;
-	case 309:
+	case 311:
 		dungeonsHandler.dungeonEvent(parameters);
 		break;
 	case 378:
